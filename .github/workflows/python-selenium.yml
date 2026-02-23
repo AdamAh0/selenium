@@ -1,3 +1,6 @@
+      - name: Clean webdriver-manager cache
+        run: |
+          rm -rf ~/.wdm
 name: Python Selenium Scraping Tests
 
 on:

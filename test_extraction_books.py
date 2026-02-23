@@ -2,6 +2,7 @@ import unittest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
 class TestBookScraping(unittest.TestCase):
@@ -9,7 +10,8 @@ class TestBookScraping(unittest.TestCase):
         chrome_options = Options()
         chrome_options.add_argument('--headless')
         chrome_options.add_argument('--disable-gpu')
-        self.browser = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
+        service = Service(ChromeDriverManager().install())
+        self.browser = webdriver.Chrome(service=service, options=chrome_options)
         self.browser.get("https://books.toscrape.com/catalogue/category/books_1/index.html")
         self.browser.implicitly_wait(5)
 
