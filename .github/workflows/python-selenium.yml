@@ -18,19 +18,9 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install selenium
-          sudo apt-get update
-          sudo apt-get install -yqq wget unzip
-          # Supprimer tout ancien chromedriver
-          sudo rm -f /usr/local/bin/chromedriver || true
-          sudo rm -f /usr/bin/chromedriver || true
-          CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+')
-          DRIVER_VERSION=$(wget -qO- "https://googlechromelabs.github.io/chrome-for-testing/LATEST_RELEASE_${CHROME_VERSION}")
-          wget -q "https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/${DRIVER_VERSION}/linux64/chromedriver-linux64.zip" -O chromedriver.zip
-          unzip chromedriver.zip
-          sudo mv chromedriver-linux64/chromedriver /usr/local/bin/
-          sudo chmod +x /usr/local/bin/chromedriver
-          rm -rf chromedriver-linux64 chromedriver.zip
+          pip install selenium webdriver-manager
       - name: Run tests
+        env:
+          WDM_LOG_LEVEL: 0
         run: |
           python -m unittest discover .
