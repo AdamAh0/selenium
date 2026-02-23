@@ -21,6 +21,9 @@ jobs:
           pip install selenium
           sudo apt-get update
           sudo apt-get install -yqq wget unzip
+          # Supprimer tout ancien chromedriver
+          sudo rm -f /usr/local/bin/chromedriver || true
+          sudo rm -f /usr/bin/chromedriver || true
           CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+')
           DRIVER_VERSION=$(wget -qO- "https://googlechromelabs.github.io/chrome-for-testing/LATEST_RELEASE_${CHROME_VERSION}")
           wget -q "https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/${DRIVER_VERSION}/linux64/chromedriver-linux64.zip" -O chromedriver.zip
